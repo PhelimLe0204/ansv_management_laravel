@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -16,12 +15,12 @@
     <link rel="icon" href="user/images/logo/logo_ansv.png" type="image/x-icon">
 
     <!-- Font Awesome -->
-	<link rel="stylesheet" href="user/plugins/fontawesome-free/css/all.min.css">
-	<!-- Carousel css -->
-	<link rel="stylesheet" href="user/plugins/OwlCarousel/assets/owl.theme.default.min.css">
-	<link rel="stylesheet" href="user/plugins/OwlCarousel/assets/owl.carousel.min.css">
+    <link rel="stylesheet" href="user/plugins/fontawesome-free/css/all.min.css">
+    <!-- Carousel css -->
+    <link rel="stylesheet" href="user/plugins/OwlCarousel/assets/owl.theme.default.min.css">
+    <link rel="stylesheet" href="user/plugins/OwlCarousel/assets/owl.carousel.min.css">
 
-	<!-- Datatable -->
+    <!-- Datatable -->
     <link rel="stylesheet" href="user/plugins/datatable/css/jquery.dataTables.min.css">
 
     <!-- Select2 CSS -->
@@ -30,38 +29,79 @@
     <!-- vendor css -->
     <link rel="stylesheet" href="user/css/style.css">
     <style>
-    	.badge-size {
-    		font-size: 15px;
-    	}
-    	.tr-click {
-    		background-color: lightgray!important;
-    		color: blue!important;
-    	}
-    	.td-data-link {
-    		color: blue!important;
-    	}
-    	.scroll_content {
-		  	height: 500px;
-		  	overflow: auto;
-		}
-		.odd td a:hover,
-		.even td a:hover {
-			color: blue!important;
-			font-weight: bold;
-		  	text-decoration: underline;
-		}
+        .badge-size {
+            font-size: 15px;
+        }
+
+        .tr-click {
+            background-color: lightgray !important;
+            color: blue !important;
+        }
+
+        .td-data-link {
+            color: blue !important;
+        }
+
+        .scroll_content {
+            height: 500px;
+            overflow: auto;
+        }
+
+        .odd td a:hover,
+        .even td a:hover {
+            color: blue !important;
+            font-weight: bold;
+            text-decoration: underline;
+        }
+
+        /* Màn hình mobile */
+        @media screen and (max-width: 1023px) {
+            body .modal-content {
+                width: 100%;
+                position: absolute;
+            }
+
+            #carousel_mobile {
+                display: block;
+            }
+
+            #carousel_desktop {
+                display: none;
+            }
+        }
+
+        /* End mobile */
+
+        /* Màn hình desktop */
+        @media screen and (min-width: 1024px) {
+            #carousel_mobile {
+                display: none;
+            }
+
+            #carousel_desktop {
+                display: block;
+            }
+
+            body .modal-content {
+                width: 140%;
+                position: absolute;
+                left: -15%;
+            }
+        }
+
+        /* End desktop */
     </style>
 </head>
 
 <body class="">
-	<!-- [ navigation menu ] start -->
-	@include('user.layout.menu')
+    <!-- [ navigation menu ] start -->
+    @include('user.layout.menu')
     <!-- [ navigation menu ] end -->
 
 
 
-	<!-- [ Header ] start -->
-	@include('user.layout.header')
+    <!-- [ Header ] start -->
+    @include('user.layout.header')
     <!-- [ Header ] end -->
 
 
@@ -73,22 +113,22 @@
 
 
     <!-- Required Js -->
-	<script src="user/js/vendor-all.min.js"></script>
-	<script src="user/js/plugins/bootstrap.min.js"></script>
-	<script src="user/js/ripple.js"></script>
-	<script src="user/js/pcoded.min.js"></script>
-	<script src="user/plugins/OwlCarousel/owl.carousel.min.js"></script>
+    <script src="user/js/vendor-all.min.js"></script>
+    <script src="user/js/plugins/bootstrap.min.js"></script>
+    <script src="user/js/ripple.js"></script>
+    <script src="user/js/pcoded.min.js"></script>
+    <script src="user/plugins/OwlCarousel/owl.carousel.min.js"></script>
 
-	<!-- Datatable -->
-	<script src="user/plugins/datatable/js/jquery.dataTables.min.js"></script>
-	<script src="user/plugins/datatable/js/demo_main.js"></script>
+    <!-- Datatable -->
+    <script src="user/plugins/datatable/js/jquery.dataTables.min.js"></script>
+    <script src="user/plugins/datatable/js/demo_main.js"></script>
 
-	<!-- Select2 -->
+    <!-- Select2 -->
     <script src="user/plugins/select2/js/select2.min.js"></script>
 
 
 
-	<script type="text/javascript">
+    <script type="text/javascript">
         $( ".tab_datatable" ).on( "click", function() {
             console.log( this.getAttribute('data-type') );
             var dataInput = {
@@ -300,7 +340,7 @@
 	       loop: true,
 	       nav: true,
 	       margin: 10,
-	       autoplay: true,
+	       autoplay: false,
 	       autoplayTimeout: 5000,
 	       responsiveClass: true,
 	       autoplayHoverPause: true
@@ -314,6 +354,7 @@
 		    "displayLength": 25,
 		    "order": [[ 0, 'asc' ]]
 		});
-	</script>
+    </script>
 </body>
+
 </html>
