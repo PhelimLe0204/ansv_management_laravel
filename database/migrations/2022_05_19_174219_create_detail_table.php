@@ -55,6 +55,7 @@ class CreateDetailTable extends Migration
             $table->date('thuc_te_FAC')->nullable();
 
             $table->text('general_issue')->nullable();
+            $table->text('solution')->nullable();
             $table->text('ke_hoach_tuan_nay')->nullable();
             $table->text('ke_hoach_tuan_sau')->nullable();
             $table->text('ket_qua_tuan_truoc')->nullable();

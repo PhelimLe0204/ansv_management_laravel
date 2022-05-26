@@ -3,6 +3,8 @@
 
 @section('body')
 
+<input type="hidden" name="_token" id="token_input" value="{{ csrf_token() }}">
+
 <!-- ===== Body ===== -->
 <div class="pcoded-main-container">
 
@@ -138,47 +140,33 @@
                         <div id="slideshow_project" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLiveLabel" aria-hidden="true">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content" style="height: 100%!important;">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLiveLabel">Dự án triển khai</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <div class="modal-header" style="height: 50px;">
+                                        <h5 class="modal-title" id="exampleModalLiveLabel">
+                                            Dự án triển khai tuần {{ Session::get('week') }} năm {{ Session::get('year') }}
+                                        </h5>
+                                        <button type="button" class="close pt-3 pb-2" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                     </div>
                                     <div class="modal-body">
                                         <div id="carousel" class="owl-carousel owl-theme" data-ride="carousel">
 
+                                            @foreach ($project_slideshow as $project_slideshow)
                                                 <div class="container item">
-                                                <!-- Item -->
+                                                    <!-- Item -->
                                                     <div class="row d-flex">
                                                         <h5 class="pb-2 pt-1 pl-3" style="width: 97%; background: red; border-radius: 16px; text-align: center;">
-                                                            <a href="javascript:void(0)" style="color: #fff; font-weight: bold;">Dự án đầu tiên</a>
+                                                            <a href="javascript:void(0)" style="color: #fff; font-weight: bold;">
+                                                                <p class="pt-1 pb-0 mb-1">{{ $project_slideshow->project_name }}</p><hr class="mb-1 mt-0">
+                                                                {{ $project_slideshow->job_name }}
+                                                            </a>
                                                         </h5>
 
                                                     </div>
-                                                <!-- End Item -->
+                                                    <!-- End Item -->
                                                 </div>
+                                            @endforeach
 
-                                                <div class="container item">
-                                                <!-- Item -->
-                                                    <div class="row d-flex">
-                                                        <h5 class="pb-2 pt-1 pl-3" style="width: 97%; background: red; border-radius: 16px; text-align: center;">
-                                                            <a href="javascript:void(0)" style="color: #fff; font-weight: bold;">Dự án thứ 2</a>
-                                                        </h5>
-
-                                                    </div>
-                                                <!-- End Item -->
-                                                </div>
-
-
-                                            <!-- <a class="carousel-control-prev" href="#carousel" role="button" data-slide="prev">
-                                                <i class="fas fa-angle-left text-dark" style="margin-left: -93%; font-size: 50px;"></i>
-                                            </a>
-                                            <a class="carousel-control-next" href="#carousel" role="button" data-slide="next">
-                                                <i class="fas fa-angle-right text-dark" style="margin-right: -93%; font-size: 50px;"></i>
-                                            </a> -->
                                         </div>
                                     </div>
-                                    <!-- <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    </div> -->
                                 </div>
                             </div>
                         </div>
@@ -216,17 +204,27 @@
                     </div>
                     <div class="card-body">
                         <ul class="nav nav-tabs mb-3" id="myTab" role="tablist">
-                            <li class="nav-item"><a
-                                class="nav-link active text-uppercase" id="home-tab"
-                                data-toggle="tab" href="#deployment" role="tab"
-                                aria-controls="home" aria-selected="true">Triển khai</a></li>
-                            <li class="nav-item"><a class="nav-link text-uppercase"
-                                id="profile-tab" data-toggle="tab" href="#telecom" role="tab"
-                                aria-controls="profile" aria-selected="false">Viễn thông</a></li>
-                            <li class="nav-item"><a class="nav-link text-uppercase"
-                                id="contact-tab" data-toggle="tab" href="#digital-transfer"
-                                role="tab" aria-controls="contact" aria-selected="false">Chuyển
-                                    đổi số</a></li>
+                            <li class="nav-item">
+                                <a class="nav-link active text-uppercase tab_datatable" id="home-tab"
+                                    data-type="3" data-level="2" data-toggle="tab" href="#deployment"
+                                    role="tab" aria-controls="home" aria-selected="true">
+                                    Triển khai
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-uppercase tab_datatable" id="profile-tab"
+                                    data-type="1" data-level="1" data-toggle="tab" href="#telecom"
+                                    role="tab" aria-controls="profile" aria-selected="false">
+                                    Viễn thông
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-uppercase tab_datatable" id="contact-tab"
+                                    data-type="2" data-level="1" data-toggle="tab" href="#digital-transfer"
+                                    role="tab" aria-controls="contact" aria-selected="false">
+                                    Chuyển đổi số
+                                </a>
+                            </li>
                         </ul>
                         <div class="tab-content" id="myTabContent">
                             <div class="tab-pane fade show active" id="deployment"

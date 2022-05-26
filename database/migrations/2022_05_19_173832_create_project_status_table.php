@@ -17,6 +17,7 @@ class CreateProjectStatusTable extends Migration
             $table->id();
 
             $table->string('project_status');
+            $table->string('explain');
 
             $table->timestamps();
         });

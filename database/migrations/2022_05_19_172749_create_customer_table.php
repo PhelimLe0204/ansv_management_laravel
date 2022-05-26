@@ -17,6 +17,7 @@ class CreateCustomerTable extends Migration
             $table->id();
 
             $table->string('customer');
+            $table->tinyInteger('enabled');
 
             $table->timestamps();
         });

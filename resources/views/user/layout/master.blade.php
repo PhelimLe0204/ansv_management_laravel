@@ -81,8 +81,6 @@
 
 	<!-- Datatable -->
 	<script src="user/plugins/datatable/js/jquery.dataTables.min.js"></script>
-
-	<script src="user/js/demo_main.js"></script>
 	<script src="user/plugins/datatable/js/demo_main.js"></script>
 
 	<!-- Select2 -->
@@ -91,15 +89,55 @@
 
 
 	<script type="text/javascript">
+        $( ".tab_datatable" ).on( "click", function() {
+            console.log( this.getAttribute('data-type') );
+            var dataInput = {
+                '_token': $('#token_input').val(),
+                'week': {!! Session::get('week') !!},
+                'year': {!! Session::get('year') !!},
+                'project_type': this.getAttribute('data-type'),
+                'pic_level': this.getAttribute('data-level'),
+            };
+            $.ajax({
+                url: '{{ route('user.dashboard.getDatatable') }}',
+                type: 'POST',
+                data: dataInput,
+            }).done(function(response){
+                console.log("response" + project_type + ": " + response);
+            })
+        });
+
+        function getDatatable(week, year, project_type, pic_level) {
+            var dataInput = {
+                '_token': $('#token_input').val(),
+                'week': week,
+                'year': year,
+                'project_type': project_type,
+                'pic_level': pic_level,
+            };
+            $.ajax({
+                url: '{{ route('user.dashboard.getDatatable') }}',
+                type: 'POST',
+                data: dataInput,
+            }).done(function(response){
+                console.log("response" + project_type + ": " + response);
+            })
+        }
+
+        $(document).ready(function() {
+            // Xử lý Datatable
+        });
+
 		$("#customer_select").select2({
 	  		dropdownParent: $('#update_1'),
 	      	placeholder: "Khách hàng đối tác...",
 	      	allowClear: true
 	  	});
 
-		var deployment_project = [{"general_issue":"<p>- Vấn đề đầu tiên gặp phải<br>\r\n- Vấn đề thứ 2 gặp phải<\/p>","project_type":1,"project_id":1,"ke_hoach":"<p>- Kế hoạch tuần 14 là ...<br>\r\n- Kế hoạch tuần 15 là ...<\/p>","project_status":4,"detail_id":2,"project_name":"Dự án đầu tiên","priority":1,"priority_display":"Một","customer":"Khách hàng 3","pic_name":"Thư ký BGĐ"},{"general_issue":"ưerwrwerwerewrew\r\nrewre\r\nwe\r\nrư\r\nrưerwe\r\nrewr","project_type":1,"project_id":2,"ke_hoach":"tr\r\nt\r\ntetretretertre\r\ntretrretretert\r\ntẻt\r\nểtrtytryrtyry\r\nrtytryrty\r\nrtytryrt","project_status":2,"detail_id":4,"project_name":"Dự án thứ 2","priority":1,"priority_display":"Một","customer":"Khách hàng 2","pic_name":"Thư ký BGĐ"}];
+		var deployment_project = {!! $project_table !!};
 		var telecom_project = [{"general_issue":"bưetrebtrerbetb\r\nẻtberbtwebtebtetb\r\nbtewbtertbewrtt\r\nbetbertberbetbte\r\nbtebtebteb\r\nbrterb\r\nẻbertbetb","project_type":2,"project_id":3,"ke_hoach":"bêtrberberbertbe\r\nrbeber\r\ntbereb\r\nbewtebtbet\r\nbtbewtbteb\r\ntbewtebtb\r\nbưt","project_status":3,"detail_id":5,"project_name":"Dự án thứ 3","priority":2,"priority_display":"Hai","customer":"Khách hàng 3","pic_name":"Phó tổng GĐ"},{"general_issue":"qư eqw ewq\r\n ewq ưq e\r\nưq eqwe qưe ưqe \r\nqưe \r\nưqe ưq\r\ne qưe\r\n ưeq\r\n \r\nưe \r\nưq ewqe ","project_type":2,"project_id":5,"ke_hoach":"q ưewq eqwe ưqe qưe eqw eqw qưe qưe qưe ưqewe ewq qew qưe\r\nqeq weq ưe ưqe ưqe ewq ưeq qưe ewq qưe \r\neqw ưqe qưe qewwqe qưe ewq ewq ew ưeqewq \r\nưeq ew qưe e ưeq qưe qưe eq ưewq qưe qưe \r\nqưe qưe ưqe ưqe ưqe \r\nqưe qưe ew ưqe\r\n ưe qưe qưe\r\nqưe qưe qưe qưe\r\n qưqwe ưqe","project_status":4,"detail_id":7,"project_name":"Dự án thứ 5","priority":1,"priority_display":"Một","customer":"Khách hàng 5","pic_name":"Phó tổng GĐ"}];
 		var digital_transfer_project = [{"general_issue":"ẻt rêt tẻ t\r\nẻ tẻ tre tre tre te tre \r\nẻ tẻt ẻ t ett \r\ntẻ t\r\ne te ret ẻt ẻ \r\ntể te rr\r\nt ẻ tẻ tẻ tẻ \r\ntẻ t\r\n rter ẻ ẻ ẻ tẻ tẻ t tẻ t\r\nẻ tẻ tt ẻ tẻ tr e","project_type":3,"project_id":4,"ke_hoach":"trytryty ry trỷ\r\nt y trytr ỷ y\r\ntry tr yty t ytry tyyt \r\nỷ y ry ry rtyrty rtyt ry\r\nrty rt yytr t rt","project_status":4,"detail_id":6,"project_name":"Dự án thứ 4","priority":3,"priority_display":"Ba","customer":"Khách hàng 4","pic_name":"Phó tổng GĐ"}];
+
 
 
 		if (deployment_project != null) {
@@ -114,17 +152,27 @@
 		                "defaultContent": ''
 		            },
 		            {
-		            	"data": "project_name",
+		            	"data": "job_name",
 	    	            render: function(data, type, row) {
-	    	            	var detail_id = row["detail_id"];
-	    	            	var project_type = row["project_type"];
-	    	            	var html = 	'<a href="/ANSV-Management/dashboard/detail/' + project_type + '_' + detail_id + '" class="text-dark">' + row["project_name"] + '</a>';
+	    	            	var detail_id = row["id"];
+	    	            	var project_type = row["type_id"];
+	    	            	var html = 	'<a href="/ANSV-Management/dashboard/detail/' + project_type + '_' + detail_id + '" class="text-dark">' + row["job_name"] + '</a>';
 							return html;
 	                    }
 		            },
 		            { "data": "customer" },
-		            { "data": "priority_display" },
-		            { "data": "pic_name" }
+		            {
+                        "data": "priority",
+	    	            render: function(data, type, row) {
+	    	            	return '<span class="pl-2">' + data + '</span>';
+	                    }
+                    },
+		            {
+                        "data": "pic_name",
+	    	            render: function(data, type, row) {
+	    	            	return '<span class="pl-2">' + data + '</span>';
+	                    }
+                    }
 		        ],
 		        "order": [[1, 'asc']]
 		    } );

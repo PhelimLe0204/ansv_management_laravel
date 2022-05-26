@@ -17,6 +17,7 @@ class CreateProjectTypeTable extends Migration
             $table->id();
 
             $table->string('project_type');
+            $table->string('explain');
 
             $table->timestamps();
         });

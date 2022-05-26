@@ -22,7 +22,7 @@ class CreatePicTable extends Migration
             $table->integer('progress');
             $table->tinyInteger('enabled');
             $table->text('note')->nullable();
-            $table->integer('assigned_by');
+            $table->string('assigned_by')->nullable();
 
             $table->timestamps();
         });

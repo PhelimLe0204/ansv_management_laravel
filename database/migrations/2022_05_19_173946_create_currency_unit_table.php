@@ -17,6 +17,7 @@ class CreateCurrencyUnitTable extends Migration
             $table->id();
 
             $table->string('currency_unit');
+            $table->string('explain');
 
             $table->timestamps();
         });

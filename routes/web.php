@@ -14,7 +14,11 @@ use App\Http\Controllers\User;
 |
 */
 
-Route::get('/', [User\HomeController::class, 'index'])->name('user.dashboard')->middleware('login.user');
+Route::middleware('login.user')->prefix('/')->group(function () {
+    Route::get('/', [User\HomeController::class, 'index'])->name('user.dashboard');
+
+    Route::post('/getDatatable', [User\HomeController::class, 'getDatatable'])->name('user.dashboard.getDatatable');
+});
 
 Route::get('/secure', [User\LoginController::class, 'login_index'])->name('user.login');
 
