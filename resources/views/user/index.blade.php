@@ -188,8 +188,8 @@
                                                     </div>
                                                 </div>
                                                 <div class="table-responsive">
-                                                    <div class="row" style="width: 90%;">
-                                                        <div class="col-6 overflow">
+                                                    <div class="row" style="width: 89%;">
+                                                        <div class="col-6 overflow border-bottom">
                                                             @if (!empty($data->pham_vi_cung_cap))
                                                             <p>
                                                                 <b>Tiến độ chung:</b><br />
@@ -263,17 +263,17 @@
                                                                     </td>
                                                                     <td>
                                                                         @if(!empty($data->hop_dong_DAC))
-                                                                            {{ date_format(date_create($data->hop_dong_DAC),'d / m / Y') }}
+                                                                            {{ date_format(date_create($data->hop_dong_DAC),'d/ m/ Y') }}
                                                                         @endif
                                                                     </td>
                                                                     <td>
                                                                         @if(!empty($data->muc_tieu_DAC))
-                                                                            {{ date_format(date_create($data->muc_tieu_DAC),'d / m / Y') }}
+                                                                            {{ date_format(date_create($data->muc_tieu_DAC),'d/ m/ Y') }}
                                                                         @endif
                                                                     </td>
                                                                     <td>
                                                                         @if(!empty($data->thuc_te_DAC))
-                                                                            {{ date_format(date_create($data->thuc_te_DAC),'d / m / Y') }}
+                                                                            {{ date_format(date_create($data->thuc_te_DAC),'d/ m/ Y') }}
                                                                         @endif
                                                                     </td>
                                                                     <td style="{{ (!empty($data->cl_DAC->d) && $data->cl_DAC->d < 0  )  ? 'color: red' : '' }}">
@@ -290,17 +290,17 @@
                                                                     @endif
                                                                     <td>
                                                                         @if(!empty($data->hop_dong_PAC))
-                                                                            {{ date_format(date_create($data->hop_dong_PAC),'d / m / Y') }}
+                                                                            {{ date_format(date_create($data->hop_dong_PAC),'d/ m/ Y') }}
                                                                         @endif
                                                                     </td>
                                                                     <td>
                                                                         @if(!empty($data->muc_tieu_PAC))
-                                                                            {{ date_format(date_create($data->muc_tieu_PAC),'d / m / Y') }}
+                                                                            {{ date_format(date_create($data->muc_tieu_PAC),'d/ m/ Y') }}
                                                                         @endif
                                                                     </td>
                                                                     <td>
                                                                         @if(!empty($data->thuc_te_PAC))
-                                                                            {{ date_format(date_create($data->thuc_te_PAC),'d / m / Y') }}
+                                                                            {{ date_format(date_create($data->thuc_te_PAC),'d/ m/ Y') }}
                                                                         @endif
                                                                     </td>
                                                                     <td style="{{ (!empty($data->cl_PAC->d) && $data->cl_PAC->d < 0  )  ? 'color: red' : '' }}">
@@ -318,17 +318,17 @@
                                                                     </td>
                                                                     <td>
                                                                         @if(!empty($data->hop_dong_FAC))
-                                                                            {{ date_format(date_create($data->hop_dong_FAC),'d / m / Y') }}
+                                                                            {{ date_format(date_create($data->hop_dong_FAC),'d/ m/ Y') }}
                                                                         @endif
                                                                     </td>
                                                                     <td>
                                                                         @if(!empty($data->muc_tieu_FAC))
-                                                                            {{ date_format(date_create($data->muc_tieu_FAC),'d / m / Y') }}
+                                                                            {{ date_format(date_create($data->muc_tieu_FAC),'d/ m/ Y') }}
                                                                         @endif
                                                                     </td>
                                                                     <td>
                                                                         @if(!empty($data->thuc_te_FAC))
-                                                                            {{ date_format(date_create($data->thuc_te_FAC),'d / m / Y') }}
+                                                                            {{ date_format(date_create($data->thuc_te_FAC),'d/ m/ Y') }}
                                                                         @endif
                                                                     </td>
                                                                     <td style="{{ (!empty($data->cl_FAC->d) && $data->cl_FAC->d < 0  )  ? 'color: red' : '' }}">
