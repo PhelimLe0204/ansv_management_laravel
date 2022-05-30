@@ -83,9 +83,9 @@
             }
 
             body .modal-content {
-                width: 140%;
+                width: 120%;
                 position: absolute;
-                left: -15%;
+                left: -10%;
             }
         }
 
@@ -125,7 +125,6 @@
 
     <!-- Select2 -->
     <script src="user/plugins/select2/js/select2.min.js"></script>
-
 
 
     <script type="text/javascript">
