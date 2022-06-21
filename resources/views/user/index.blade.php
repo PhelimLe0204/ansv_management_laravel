@@ -139,7 +139,7 @@
                 <div class="card">
                     <div class="card-header">
 
-                        <!--Phần modal   -->
+                        <!-- === Phần modal === -->
                         <div id="slideshow_project" class="modal fade" tabindex="-1" role="dialog"
                             aria-labelledby="exampleModalLiveLabel" aria-hidden="true">
                             <div class="modal-dialog" role="document">
@@ -276,9 +276,9 @@
                                                                             {{ date_format(date_create($data->thuc_te_DAC),'d/ m/ Y') }}
                                                                         @endif
                                                                     </td>
-                                                                    <td style="{{ (!empty($data->cl_DAC->d) && $data->cl_DAC->d < 0  )  ? 'color: red' : '' }}">
-                                                                        @if(!empty( $data->cl_DAC))
-                                                                            {{ $data->cl_DAC->d }}
+                                                                    <td>
+                                                                        @if(!empty($data->cl_DAC) && $data->cl_DAC != '0')
+                                                                            {!! $data->cl_DAC !!}
                                                                         @endif
                                                                     </td>
                                                                 </tr>
@@ -303,9 +303,9 @@
                                                                             {{ date_format(date_create($data->thuc_te_PAC),'d/ m/ Y') }}
                                                                         @endif
                                                                     </td>
-                                                                    <td style="{{ (!empty($data->cl_PAC->d) && $data->cl_PAC->d < 0  )  ? 'color: red' : '' }}">
-                                                                        @if(!empty( $data->cl_PAC->d))
-                                                                            {{ $data->cl_PAC->d }}
+                                                                    <td>
+                                                                        @if(!empty($data->cl_PAC) && $data->cl_PAC != '0')
+                                                                            {!! $data->cl_PAC !!}
                                                                         @endif
                                                                     </td>
                                                                 </tr>
@@ -331,9 +331,9 @@
                                                                             {{ date_format(date_create($data->thuc_te_FAC),'d/ m/ Y') }}
                                                                         @endif
                                                                     </td>
-                                                                    <td style="{{ (!empty($data->cl_FAC->d) && $data->cl_FAC->d < 0  )  ? 'color: red' : '' }}">
-                                                                        @if(!empty( $data->cl_FAC->d))
-                                                                            {{ $data->cl_FAC->d }}
+                                                                    <td>
+                                                                        @if(!empty($data->cl_FAC) && $data->cl_FAC != '0')
+                                                                            {!! $data->cl_FAC !!}
                                                                         @endif
                                                                     </td>
                                                                 </tr>

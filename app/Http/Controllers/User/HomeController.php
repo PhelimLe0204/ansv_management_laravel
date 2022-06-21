@@ -11,6 +11,8 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
+use function PHPSTORM_META\type;
+
 class HomeController extends Controller
 {
     //
@@ -72,8 +74,7 @@ class HomeController extends Controller
             'priority.priority',
             'detail.general_issue',
             'detail.ke_hoach_tuan_sau'
-        )
-            ->get();
+        )->get();
 
         // Dữ liệu Slideshow (dự án Triển khai)
         $project_slideshow = $innerJoin->join('currency_unit', 'currency_unit.id', '=', 'detail.currency_unit_id')
@@ -94,26 +95,30 @@ class HomeController extends Controller
                 'detail.tong_gia_tri_thuc_te',
                 'detail.so_tien_tam_ung',
                 'detail.ke_hoach_tam_ung',
+
                 'detail.so_tien_DAC',
                 'detail.hop_dong_DAC',
                 'detail.muc_tieu_DAC',
                 'detail.thuc_te_DAC',
+
                 'detail.so_tien_PAC',
                 'detail.hop_dong_PAC',
                 'detail.muc_tieu_PAC',
                 'detail.thuc_te_PAC',
+
                 'detail.so_tien_FAC',
                 'detail.hop_dong_FAC',
                 'detail.muc_tieu_FAC',
                 'detail.thuc_te_FAC',
+
                 'detail.general_issue',
                 'detail.solution',
                 'detail.ke_hoach_tuan_sau',
                 'detail.ket_qua_tuan_nay'
-            )
-            ->get();
+            )->get();
 
         foreach ($project_slideshow as $item) {
+            // Truy vấn tên AM cho từng bản ghi
             $item->am_name = User::select('users.name')
                 ->join('pic', 'pic.user_id', '=', 'users.id')
                 ->join('project', 'project.id', '=', 'pic.project_id')
@@ -121,30 +126,30 @@ class HomeController extends Controller
                 ->where('pic.level', 1)
                 ->first()->name;
 
-            if(empty($item->thuc_te_DAC)){
-                $item->cl_DAC = date_create($item->muc_tieu_DAC) ->diff(date_create(date("Y-m-d")));
-                if(strtotime($item->muc_tieu_DAC) < strtotime(date("Y-m-d")) ){
-                    $item->cl_DAC->d = "-". $item->cl_DAC->d;
+            // Tính ngày chênh lệch giữa "thực tế" và "mục tiêu" (nếu "thực tế" null -> "thực tế" = "hiện tại")
+            if ($item->thuc_te_DAC == null) {
+                $item->cl_DAC = Carbon::parse($item->thuc_te_DAC)->diffInDays($item->muc_tieu_DAC);
+                if (Carbon::parse($item->muc_tieu_DAC)->lt(now()) && $item->cl_DAC != 0) {
+                    // Nếu "mục tiêu" sớm hơn "hiện tại" (quá hạn)
+                    $item->cl_DAC = '<font color="red">-'.$item->cl_DAC.'</font>';
                 }
             }
-
-            if(empty($item->thuc_te_PAC)){
-                $item->cl_PAC = date_create($item->muc_tieu_PAC) ->diff(date_create(date("Y-m-d")));
-                if(strtotime($item->muc_tieu_PAC) < strtotime(date("Y-m-d")) ){
-                    $item->cl_PAC->d = "-". $item->cl_PAC->d;
+            if ($item->thuc_te_PAC == null) {
+                $item->cl_PAC = Carbon::parse($item->thuc_te_PAC)->diffInDays($item->muc_tieu_PAC);
+                if (Carbon::parse($item->muc_tieu_PAC)->lt(now()) && $item->cl_PAC != 0) {
+                    // Nếu "mục tiêu" sớm hơn "hiện tại" (quá hạn)
+                    $item->cl_PAC = '<font color="red">-'.$item->cl_PAC.'</font>';
                 }
             }
-
-            if(empty($item->thuc_te_FAC)){
-                $item->cl_FAC = date_create($item->muc_tieu_FAC) ->diff(date_create(date("Y-m-d")));
-                if(strtotime($item->muc_tieu_FAC) < strtotime(date("Y-m-d")) ){
-                    $item->cl_FAC->d = "-". $item->cl_FAC->d;
+            if ($item->thuc_te_FAC == null) {
+                $item->cl_FAC = Carbon::parse($item->thuc_te_FAC)->diffInDays($item->muc_tieu_FAC);
+                if (Carbon::parse($item->muc_tieu_FAC)->lt(now()) && $item->cl_FAC != 0) {
+                    // Nếu "mục tiêu" sớm hơn "hiện tại" (quá hạn)
+                    $item->cl_FAC = '<font color="red">-'.$item->cl_FAC.'</font>';
                 }
             }
-
         }
 
-        // return(date("Y-m-d"));
         return view('user.index', compact('project_table', 'project_slideshow'));
     }
 }
