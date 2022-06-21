@@ -72,7 +72,7 @@ class HomeController extends Controller
             'detail.job_name',
             'detail.type_id',
             'priority.priority',
-            'project_status.status_id',
+            'project_status.project_status',
             'detail.general_issue',
             'detail.ke_hoach_tuan_sau'
         )->get();
