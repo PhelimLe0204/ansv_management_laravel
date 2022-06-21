@@ -617,7 +617,7 @@ class DatabaseSeeder extends Seeder
                 'phan_tich_SWOT'            => null,
 
                 'pham_vi_cung_cap'          => 'Phạm vi cung cấp 1',
-                'tong_gia_tri_thuc_te'      => 12312836138,
+                'tong_gia_tri_thuc_te'      => '12312836138',
                 'so_tien_tam_ung'           => 32492429479,
                 'ke_hoach_tam_ung'          => null,
 
@@ -709,7 +709,7 @@ class DatabaseSeeder extends Seeder
                 'phan_tich_SWOT'            => null,
 
                 'pham_vi_cung_cap'          => 'Phạm vi cung cấp 1223',
-                'tong_gia_tri_thuc_te'      => 12312836138,
+                'tong_gia_tri_thuc_te'      => '12312836138',
                 'so_tien_tam_ung'           => 32492429479,
                 'ke_hoach_tam_ung'          => null,
 

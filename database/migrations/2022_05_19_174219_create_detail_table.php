@@ -35,7 +35,7 @@ class CreateDetailTable extends Migration
             $table->text('phan_tich_swot')->nullable();
 
             $table->text('pham_vi_cung_cap')->nullable();
-            $table->double('tong_gia_tri_thuc_te')->nullable();
+            $table->string('tong_gia_tri_thuc_te')->nullable();
             $table->double('so_tien_tam_ung')->nullable();
             $table->date('ke_hoach_tam_ung')->nullable();
 
