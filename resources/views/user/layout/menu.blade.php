@@ -28,14 +28,14 @@
                 <li class="nav-item pcoded-menu-caption">
                     <label>Điều hướng</label>
                 </li>
-                <li class="nav-item">
-                    <a href="/ANSV-Management/dashboard/13_2022" class="nav-link ">
+                <li class="nav-item {{ (request()->segment(1) == '' || request()->segment(1) == 'dashboard') ? 'active' : '' }}">
+                    <a href="./dashboard?week={{ Session::get('week') }}&year={{ Session::get('year') }}" class="nav-link">
                         <span class="pcoded-micon"><i class="feather icon-home"></i></span>
                         <span class="pcoded-mtext">Dashboard</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="/ANSV-Management/dashboard/customer" class="nav-link ">
+                    <a href="/ANSV-Management/dashboard/customer" class="nav-link">
                         <span class="pcoded-micon"><i class="feather icon-users"></i></span>
                         <span class="pcoded-mtext">Khách hàng</span>
                     </a>

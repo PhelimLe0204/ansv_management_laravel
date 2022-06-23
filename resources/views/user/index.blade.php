@@ -17,6 +17,7 @@
                         <div class="page-header-title float-left">
                             <h5 class="m-b-10">
                                 Dashboard Analytics - <b>CEO</b>
+                                <span class="pl-4">(Tuần: <b>{{ Session::get('week') }}</b> / Năm: <b>{{ Session::get('year') }}</b>)</span>
                             </h5>
                         </div>
                         <ul class="breadcrumb float-right">
@@ -175,15 +176,15 @@
                                                 <div class="row ml-2 pt-3 pb-1 pl-4 mb-4"
                                                     style="width: 95.6%; padding-bottom: 0; background: lightgrey; border-radius: 0 0 16px 16px; margin-top: -1%;">
                                                     <div class="col-5">
-                                                        <b>AM:</b><span class="${padding_left_slideshow}">{{
+                                                        <b>AM: </b><span class="${padding_left_slideshow}">{{
                                                             $data->am_name }}</span>
                                                     </div>
                                                     <div class="col-5">
-                                                        <b>PM:</b><span class="${padding_left_slideshow}">{{
+                                                        <b>PM: </b><span class="${padding_left_slideshow}">{{
                                                             $data->pm_name }}</span>
                                                     </div>
                                                     <div class="col-2 pl-4">
-                                                        <b>Priority:</b><span class="${padding_left_slideshow}">{{
+                                                        <b>Priority: </b><span class="${padding_left_slideshow}">{{
                                                             $data->priority }}</span>
                                                     </div>
                                                 </div>
@@ -433,22 +434,19 @@
                         <ul class="nav nav-tabs mb-3" id="myTab" role="tablist">
                             <li class="nav-item">
                                 <a class="nav-link active text-uppercase" id="home-tab" data-toggle="tab"
-                                    href="#deployment" role="tab" aria-controls="home" aria-selected="true"
-                                    onclick="getDatatable(3, 2);">
+                                    href="#deployment" role="tab" aria-controls="home" aria-selected="true">
                                     Triển khai
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link text-uppercase" id="profile-tab" data-toggle="tab" href="#telecom"
-                                    role="tab" aria-controls="profile" aria-selected="false"
-                                    onclick="getDatatable(1, 1);">
+                                    role="tab" aria-controls="profile" aria-selected="false">
                                     Viễn thông
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link text-uppercase" id="contact-tab" data-toggle="tab"
-                                    href="#digital-transfer" role="tab" aria-controls="contact" aria-selected="false"
-                                    onclick="getDatatable(2, 1);">
+                                    href="#digital-transfer" role="tab" aria-controls="contact" aria-selected="false">
                                     Chuyển đổi số
                                 </a>
                             </li>
@@ -541,409 +539,24 @@
     <script src="user/plugins/highcharts/js/exporting.js"></script>
     <script src="user/plugins/highcharts/js/export-data.js"></script>
     <script src="user/plugins/highcharts/js/accessibility.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="user/js/main_dashboard.js"></script>
 
 
 
     <script type="text/javascript">
-        var colors = Highcharts.getOptions().colors.slice(0),
-            dark = -0.5;
+        $( document ).ready(function() {
+            var statistic_1 = {!! $statistic_for_chart_1 !!};
+            var statistic_2 = {!! $statistic_for_chart_2 !!};
+            var statistic_3 = {!! $statistic_for_chart_3 !!};
 
+            var project_table_1 = {!! $project_table_1 !!};
+            var project_table_2 = {!! $project_table_2 !!};
+            var project_table_3 = {!! $project_table_3 !!};
 
-        colors[1] = Highcharts.Color(colors[0]).brighten(dark).get();
-
-        colors[3] = Highcharts.Color(colors[2]).brighten(dark).get();
-
-        var colors_new = ['#9ccc65', '#ffba57', '#ff5252', '#4680ff'];
-
-        const thong_ke = [1, null, 1, null, null, null, null, null, null, null, 1, null, null, null, 1, null, null, null, null, null, null, null, null, null, null, null, 1, null, null, null];
-
-        /* Đồ thị Triển khai */
-        Highcharts.chart('highcharts-container-1',
-        {
-            chart : {
-                type : 'column'
-            },
-            colors: colors_new,
-            title : {
-                text : 'Dự án Triển khai'
-            },
-            xAxis : {
-                categories : [ 'Ưu tiên 1', 'Ưu tiên 2', 'Ưu tiên 3', 'Done' ]
-            },
-            yAxis : {
-                min : 0,
-                title : {
-                    text : 'Số lượng (dự án)'
-                },
-                stackLabels : {
-                    enabled : true,
-                    style : {
-                        fontWeight : 'bold',
-                        color : ( // theme
-                        Highcharts.defaultOptions.title.style && Highcharts.defaultOptions.title.style.color)
-                                || 'gray'
-                    }
-                }
-            },
-            legend : {
-                align : 'right',
-                x : -30,
-                verticalAlign : 'top',
-                y : 25,
-                floating : true,
-                backgroundColor : Highcharts.defaultOptions.legend.backgroundColor
-                        || 'white',
-                borderColor : '#CCC',
-                borderWidth : 1,
-                shadow : false
-            },
-            tooltip : {
-                headerFormat : '<b>{point.x}</b><br/>',
-                pointFormat : '{series.name}: {point.y}<br/>Total: {point.stackTotal}'
-            },
-            plotOptions : {
-                column : {
-                    stacking : 'normal',
-                    dataLabels : {
-                        enabled : true
-                    }
-                }
-            },
-            series : [ {
-                name : 'Ongoing',
-                data : [ thong_ke[2], thong_ke[5], thong_ke[8], null ]
-            }, {
-                name : 'Warning',
-                data : [ thong_ke[1], thong_ke[4], thong_ke[7], null ]
-            }, {
-                name : 'Danger',
-                data : [ thong_ke[0], thong_ke[3], thong_ke[6], null ]
-            }, {
-                name : 'Complete',
-                data : [ null, null, null, thong_ke[9] ]
-            } ]
+            statistic_chart(statistic_1, statistic_2, statistic_3);
+            drawDatatable(project_table_1, project_table_2, project_table_3);
         });
-
-
-
-        /* Đồ thị Viễn thông */
-        Highcharts.chart('highcharts-container-2',
-        {
-            chart : {
-                type : 'column'
-            },
-            colors: colors_new,
-            title : {
-                text : 'Dự án Viễn thông'
-            },
-            xAxis : {
-                categories : [ 'Ưu tiên 1', 'Ưu tiên 2', 'Ưu tiên 3', 'Done' ]
-            },
-            yAxis : {
-                min : 0,
-                title : {
-                    text : 'Số lượng (dự án)'
-                },
-                stackLabels : {
-                    enabled : true,
-                    style : {
-                        fontWeight : 'bold',
-                        color : ( // theme
-                        Highcharts.defaultOptions.title.style && Highcharts.defaultOptions.title.style.color)
-                                || 'gray'
-                    }
-                }
-            },
-            legend : {
-                align : 'right',
-                x : -30,
-                verticalAlign : 'top',
-                y : 25,
-                floating : true,
-                backgroundColor : Highcharts.defaultOptions.legend.backgroundColor
-                        || 'white',
-                borderColor : '#CCC',
-                borderWidth : 1,
-                shadow : false
-            },
-            tooltip : {
-                headerFormat : '<b>{point.x}</b><br/>',
-                pointFormat : '{series.name}: {point.y}<br/>Total: {point.stackTotal}'
-            },
-            plotOptions : {
-                column : {
-                    stacking : 'normal',
-                    dataLabels : {
-                        enabled : true
-                    }
-                }
-            },
-            series : [ {
-                name : 'Ongoing',
-                data : [ thong_ke[12], thong_ke[15], thong_ke[18], null ]
-            }, {
-                name : 'Warning',
-                data : [ thong_ke[11], thong_ke[14], thong_ke[17], null ]
-            }, {
-                name : 'Danger',
-                data : [ thong_ke[10], thong_ke[13], thong_ke[16], null ]
-            }, {
-                name : 'Complete',
-                data : [ null, null, null, thong_ke[19] ]
-            } ]
-        });
-
-
-
-        /* Đồ thị Chuyển đổi số */
-        Highcharts.chart('highcharts-container-3',
-        {
-            chart : {
-                type : 'column'
-            },
-            colors: colors_new,
-            title : {
-                text : 'Dự án Chuyển đổi số'
-            },
-            xAxis : {
-                categories : [ 'Ưu tiên 1', 'Ưu tiên 2', 'Ưu tiên 3', 'Done' ]
-            },
-            yAxis : {
-                min : 0,
-                title : {
-                    text : 'Số lượng (dự án)'
-                },
-                stackLabels : {
-                    enabled : true,
-                    style : {
-                        fontWeight : 'bold',
-                        color : ( // theme
-                        Highcharts.defaultOptions.title.style && Highcharts.defaultOptions.title.style.color)
-                                || 'gray'
-                    }
-                }
-            },
-            legend : {
-                align : 'right',
-                x : -30,
-                verticalAlign : 'top',
-                y : 25,
-                floating : true,
-                backgroundColor : Highcharts.defaultOptions.legend.backgroundColor
-                        || 'white',
-                borderColor : '#CCC',
-                borderWidth : 1,
-                shadow : false
-            },
-            tooltip : {
-                headerFormat : '<b>{point.x}</b><br/>',
-                pointFormat : '{series.name}: {point.y}<br/>Total: {point.stackTotal}'
-            },
-            plotOptions : {
-                column : {
-                    stacking : 'normal',
-                    dataLabels : {
-                        enabled : true
-                    }
-                }
-            },
-            series : [ {
-                name : 'Ongoing',
-                data : [ thong_ke[22], thong_ke[25], thong_ke[28], null ]
-            }, {
-                name : 'Warning',
-                data : [ thong_ke[21], thong_ke[24], thong_ke[27], null ]
-            }, {
-                name : 'Danger',
-                data : [ thong_ke[20], thong_ke[23], thong_ke[26], null ]
-            }, {
-                name : 'Complete',
-                data : [ null, null, null, thong_ke[29] ]
-            } ]
-        });
-
-
-
-        var deployment_project = {!! $project_table !!};
-		var telecom_project = [{"general_issue":"bưetrebtrerbetb\r\nẻtberbtwebtebtetb\r\nbtewbtertbewrtt\r\nbetbertberbetbte\r\nbtebtebteb\r\nbrterb\r\nẻbertbetb","project_type":2,"project_id":3,"ke_hoach":"bêtrberberbertbe\r\nrbeber\r\ntbereb\r\nbewtebtbet\r\nbtbewtbteb\r\ntbewtebtb\r\nbưt","project_status":3,"detail_id":5,"project_name":"Dự án thứ 3","priority":2,"priority_display":"Hai","customer":"Khách hàng 3","pic_name":"Phó tổng GĐ"},{"general_issue":"qư eqw ewq\r\n ewq ưq e\r\nưq eqwe qưe ưqe \r\nqưe \r\nưqe ưq\r\ne qưe\r\n ưeq\r\n \r\nưe \r\nưq ewqe ","project_type":2,"project_id":5,"ke_hoach":"q ưewq eqwe ưqe qưe eqw eqw qưe qưe qưe ưqewe ewq qew qưe\r\nqeq weq ưe ưqe ưqe ewq ưeq qưe ewq qưe \r\neqw ưqe qưe qewwqe qưe ewq ewq ew ưeqewq \r\nưeq ew qưe e ưeq qưe qưe eq ưewq qưe qưe \r\nqưe qưe ưqe ưqe ưqe \r\nqưe qưe ew ưqe\r\n ưe qưe qưe\r\nqưe qưe qưe qưe\r\n qưqwe ưqe","project_status":4,"detail_id":7,"project_name":"Dự án thứ 5","priority":1,"priority_display":"Một","customer":"Khách hàng 5","pic_name":"Phó tổng GĐ"}];
-		var digital_transfer_project = [{"general_issue":"ẻt rêt tẻ t\r\nẻ tẻ tre tre tre te tre \r\nẻ tẻt ẻ t ett \r\ntẻ t\r\ne te ret ẻt ẻ \r\ntể te rr\r\nt ẻ tẻ tẻ tẻ \r\ntẻ t\r\n rter ẻ ẻ ẻ tẻ tẻ t tẻ t\r\nẻ tẻ tt ẻ tẻ tr e","project_type":3,"project_id":4,"ke_hoach":"trytryty ry trỷ\r\nt y trytr ỷ y\r\ntry tr yty t ytry tyyt \r\nỷ y ry ry rtyrty rtyt ry\r\nrty rt yytr t rt","project_status":4,"detail_id":6,"project_name":"Dự án thứ 4","priority":3,"priority_display":"Ba","customer":"Khách hàng 4","pic_name":"Phó tổng GĐ"}];
-
-
-
-		if (deployment_project != null) {
-			/* ===== Datatable 1: Dự án Triển khai ===== */
-			var table_1 = $('#datatable_1').DataTable( {
-		        "data": deployment_project,
-		        "columns": [
-		            {
-		                "className":      'dt-control',
-		                "orderable":      false,
-		                "data":           null,
-		                "defaultContent": ''
-		            },
-		            {
-		            	"data": "job_name",
-	    	            render: function(data, type, row) {
-	    	            	var detail_id = row["id"];
-	    	            	var project_type = row["type_id"];
-	    	            	var html = 	'<a href="/ANSV-Management/dashboard/detail/' + project_type + '_' + detail_id + '" class="text-dark">' + row["job_name"] + '</a>';
-							return html;
-	                    }
-		            },
-		            { "data": "customer" },
-		            {
-                        "data": "priority",
-	    	            render: function(data, type, row) {
-	    	            	return '<span class="pl-2">' + data + '</span>';
-	                    }
-                    },
-		            {
-                        "data": "pic_name",
-	    	            render: function(data, type, row) {
-	    	            	return '<span class="pl-2">' + data + '</span>';
-	                    }
-                    }
-		        ],
-		        "order": [[1, 'asc']]
-		    } );
-
-		 	// Add event listener for opening and closing details
-		    $('#datatable_1 tbody').on('click', 'td.dt-control', function () {
-		        var tr = $(this).closest('tr');
-		        var row = table_1.row( tr );
-
-		        if ( row.child.isShown() ) {
-		            // This row is already open - close it
-		            row.child.hide();
-		            tr.removeClass('shown font-weight-bold tr-click');
-		            tr.children('td').children('a').removeClass('td-data-link');
-		        }
-		        else {
-		            // Open this row
-		            row.child( format(row.data()) ).show();
-		            tr.addClass('shown font-weight-bold tr-click');
-		            tr.children('td').children('a').addClass('td-data-link');
-		        }
-		    } );
-		    /* ===== End Datatable 1 ===== */
-		}
-
-		if (telecom_project != null) {
-			/* ===== Datatable 2: Dự án Viễn thông ===== */
-			var table_2 = $('#datatable_2').DataTable( {
-		        "data": telecom_project,
-		        "columns": [
-		            {
-		                "className":      'dt-control',
-		                "orderable":      false,
-		                "data":           null,
-		                "defaultContent": ''
-		            },
-		            {
-		            	"data": "project_name",
-	    	            render: function(data, type, row) {
-	    	            	var detail_id = row["detail_id"];
-	    	            	var project_type = row["project_type"];
-	    	            	var html = 	'<a href="/ANSV-Management/dashboard/detail/' + project_type + '_' + detail_id + '" class="text-dark">' + row["project_name"] + '</a>';
-							return html;
-	                    }
-		            },
-		            { "data": "customer" },
-		            { "data": "priority_display" },
-		            { "data": "pic_name" }
-		        ],
-		        "order": [[1, 'asc']]
-		    } );
-
-		 	// Add event listener for opening and closing details
-		    $('#datatable_2 tbody').on('click', 'td.dt-control', function () {
-		        var tr = $(this).closest('tr');
-		        var row = table_2.row( tr );
-
-		        if ( row.child.isShown() ) {
-		            // This row is already open - close it
-		            row.child.hide();
-		            tr.removeClass('shown font-weight-bold tr-click');
-		            tr.children('td').children('a').removeClass('td-data-link');
-		        }
-		        else {
-		            // Open this row
-		            row.child( format(row.data()) ).show();
-		            tr.addClass('shown font-weight-bold tr-click');
-		            tr.children('td').children('a').addClass('td-data-link');
-		        }
-		    } );
-		    /* ===== End Datatable 2 ===== */
-		}
-
-		if (digital_transfer_project != null) {
-			/* ===== Datatable 3: Dự án Viễn thông ===== */
-			var table_3 = $('#datatable_3').DataTable( {
-		        "data": digital_transfer_project,
-		        "columns": [
-		            {
-		                "className":      'dt-control',
-		                "orderable":      false,
-		                "data":           null,
-		                "defaultContent": ''
-		            },
-		            {
-		            	"data": "project_name",
-	    	            render: function(data, type, row) {
-	    	            	var detail_id = row["detail_id"];
-	    	            	var project_type = row["project_type"];
-	    	            	var html = 	'<a href="/ANSV-Management/dashboard/detail/' + project_type + '_' + detail_id + '" class="text-dark">' + row["project_name"] + '</a>';
-							return html;
-	                    }
-		            },
-		            { "data": "customer" },
-		            { "data": "priority_display" },
-		            { "data": "pic_name" }
-		        ],
-		        "order": [[1, 'asc']]
-		    } );
-
-		 	// Add event listener for opening and closing details
-		    $('#datatable_3 tbody').on('click', 'td.dt-control', function () {
-		        var tr = $(this).closest('tr');
-		        var row = table_3.row( tr );
-
-		        if ( row.child.isShown() ) {
-		            // This row is already open - close it
-		            row.child.hide();
-		            tr.removeClass('shown font-weight-bold tr-click');
-		            tr.children('td').children('a').removeClass('td-data-link');
-		        }
-		        else {
-		            // Open this row
-		            row.child( format(row.data()) ).show();
-		            tr.addClass('shown font-weight-bold tr-click');
-		            tr.children('td').children('a').addClass('td-data-link');
-		        }
-		    } );
-		    /* ===== End Datatable 3 ===== */
-		}
-
-		var owl = $('.owl-carousel');
-	  	owl.owlCarousel({
-	       items: 1,
-	       loop: true,
-	       nav: true,
-	       margin: 10,
-	       autoplay: false,
-	       autoplayTimeout: 5000,
-	       responsiveClass: true,
-	       autoplayHoverPause: true
-	   	});
-
-	  	$('#table_customer_new,#table_customer_all,#table_user_all,#table_user_ban').DataTable( {
-		    "scrollX": true,
-		    "scrollCollapse": true,
-		    "paging":         false,
-		    "responsive": true,
-		    "displayLength": 25,
-		    "order": [[ 0, 'asc' ]]
-		});
     </script>
 
 </div>

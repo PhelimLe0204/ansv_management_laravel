@@ -371,6 +371,9 @@ class DatabaseSeeder extends Seeder
             // Báo cáo dự án 1
             [
                 'pic_id'                    => 1,
+                'am_name'                   => 'Nguyễn Văn AM',
+                'pm_name'                   => '',
+                'manager_name'              => 'Nguyễn Văn Manager',
                 'type_id'                   => 1,
                 'priority_id'               => 3,
                 'status_id'                 => 2,
@@ -416,6 +419,9 @@ class DatabaseSeeder extends Seeder
             ],
             [
                 'pic_id'                    => 1,
+                'am_name'                   => 'Nguyễn Văn AM',
+                'pm_name'                   => '',
+                'manager_name'              => 'Nguyễn Văn Manager',
                 'type_id'                   => 1,
                 'priority_id'               => 2,
                 'status_id'                 => 1,
@@ -463,6 +469,9 @@ class DatabaseSeeder extends Seeder
             // Báo cáo dự án 2
             [
                 'pic_id'                    => 2,
+                'am_name'                   => 'Nguyễn Văn AM',
+                'pm_name'                   => '',
+                'manager_name'              => 'Nguyễn Văn Manager',
                 'type_id'                   => 2,
                 'priority_id'               => 2,
                 'status_id'                 => 3,
@@ -508,6 +517,9 @@ class DatabaseSeeder extends Seeder
             ],
             [
                 'pic_id'                    => 2,
+                'am_name'                   => 'Nguyễn Văn AM',
+                'pm_name'                   => '',
+                'manager_name'              => 'Nguyễn Văn Manager',
                 'type_id'                   => 2,
                 'priority_id'               => 1,
                 'status_id'                 => 3,
@@ -555,6 +567,9 @@ class DatabaseSeeder extends Seeder
             // Báo cáo dự án 3
             [
                 'pic_id'                    => 3,
+                'am_name'                   => 'Nguyễn Văn AM',
+                'pm_name'                   => '',
+                'manager_name'              => 'Nguyễn Văn Manager',
                 'type_id'                   => 2,
                 'priority_id'               => 1,
                 'status_id'                 => 2,
@@ -600,6 +615,9 @@ class DatabaseSeeder extends Seeder
             ],
             [
                 'pic_id'                    => 4,
+                'am_name'                   => 'Nguyễn Văn AM',
+                'pm_name'                   => 'Nguyễn Văn PM',
+                'manager_name'              => 'Nguyễn Văn Manager',
                 'type_id'                   => 3,
                 'priority_id'               => 2,
                 'status_id'                 => 2,
@@ -647,6 +665,9 @@ class DatabaseSeeder extends Seeder
             // Báo cáo dự án 4
             [
                 'pic_id'                    => 5,
+                'am_name'                   => 'Nguyễn Văn AM',
+                'pm_name'                   => '',
+                'manager_name'              => 'Nguyễn Văn Manager',
                 'type_id'                   => 1,
                 'priority_id'               => 3,
                 'status_id'                 => 3,
@@ -692,6 +713,9 @@ class DatabaseSeeder extends Seeder
             ],
             [
                 'pic_id'                    => 6,
+                'am_name'                   => 'Nguyễn Văn AM',
+                'pm_name'                   => 'Nguyễn Văn PM',
+                'manager_name'              => 'Nguyễn Văn Manager',
                 'type_id'                   => 3,
                 'priority_id'               => 1,
                 'status_id'                 => 1,

@@ -16,8 +16,7 @@ use App\Http\Controllers\User;
 
 Route::middleware('login.user')->prefix('/')->group(function () {
     Route::get('/', [User\HomeController::class, 'index'])->name('user.dashboard');
-
-    Route::post('/getDatatable', [User\HomeController::class, 'getDatatable'])->name('user.dashboard.getDatatable');
+    Route::get('/dashboard', [User\HomeController::class, 'index'])->name('user.dashboard');
 });
 
 Route::get('/secure', [User\LoginController::class, 'login_index'])->name('user.login');
@@ -25,6 +24,8 @@ Route::get('/secure', [User\LoginController::class, 'login_index'])->name('user.
 Route::post('/secure', [User\LoginController::class, 'login_processing']);
 
 Route::get('/logout', [User\LoginController::class, 'logout'])->name('user.logout');
+
+Route::get('/test_loadgo', [User\HomeController::class, 'test_loadgo']);
 
 Route::get('/test', function () {
     return view('welcome');

@@ -28,6 +28,7 @@
 
     <!-- vendor css -->
     <link rel="stylesheet" href="user/css/style.css">
+
     <style>
         .badge-size {
             font-size: 15px;
@@ -125,6 +126,21 @@
 
     <!-- Select2 -->
     <script src="user/plugins/select2/js/select2.min.js"></script>
+
+
+    <script type="text/javascript">
+		var owl = $('.owl-carousel');
+	  	owl.owlCarousel({
+	       items: 1,
+	       loop: true,
+	       nav: true,
+	       margin: 10,
+	       autoplay: false,
+	       autoplayTimeout: 5000,
+	       responsiveClass: true,
+	       autoplayHoverPause: true
+	   	});
+    </script>
 </body>
 
 </html>

@@ -2,7 +2,7 @@
 <header class="navbar pcoded-header navbar-expand-lg navbar-light header-blue">
     <div class="m-header">
         <a class="mobile-menu" id="mobile-collapse" href="#!"><span></span></a>
-        <a href="/ANSV-Management/chief/dashboard/13_2022" class="b-brand">
+        <a href="./dashboard?week={{ Session::get('week') }}&year={{ Session::get('year') }}" class="b-brand">
             <!-- ========   change your logo hear   ============ -->
             <img src="user/images/logo/ANSV_logo.png" style="width: 80%;" alt="" class="logo pl-4">
             <img src="user/images/logo-icon.png" alt="" class="logo-thumb">

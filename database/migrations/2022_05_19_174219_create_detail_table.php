@@ -17,6 +17,9 @@ class CreateDetailTable extends Migration
             $table->id();
 
             $table->integer('pic_id');
+            $table->string('am_name')->nullable();
+            $table->string('pm_name')->nullable();
+            $table->string('manager_name')->nullable();
             $table->integer('type_id');
             $table->integer('priority_id');
             $table->integer('status_id');
