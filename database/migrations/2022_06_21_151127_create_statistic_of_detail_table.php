@@ -19,15 +19,15 @@ class CreateStatisticOfDetailTable extends Migration
             $table->integer('type_id');
             $table->integer('year');
             $table->integer('week');
-            $table->integer('first_high');
-            $table->integer('first_medium');
-            $table->integer('first_low');
-            $table->integer('second_high');
-            $table->integer('second_medium');
-            $table->integer('second_low');
-            $table->integer('third_high');
-            $table->integer('third_medium');
-            $table->integer('third_low');
+            $table->integer('high_danger');
+            $table->integer('high_warning');
+            $table->integer('high_ongoing');
+            $table->integer('medium_danger');
+            $table->integer('medium_warning');
+            $table->integer('medium_ongoing');
+            $table->integer('low_danger');
+            $table->integer('low_warning');
+            $table->integer('low_ongoing');
             $table->integer('done');
             $table->string('note')->nullable();
 

@@ -12,7 +12,7 @@ class LoginController extends Controller
 {
     //
     public function login_index() {
-        return view('user.login');
+        return view('user.secure.login');
     }
 
     public function login_processing(Request $request) {

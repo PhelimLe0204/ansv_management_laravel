@@ -16,7 +16,13 @@ use App\Http\Controllers\User;
 
 Route::middleware('login.user')->prefix('/')->group(function () {
     Route::get('/', [User\HomeController::class, 'index'])->name('user.dashboard');
-    Route::get('/dashboard', [User\HomeController::class, 'index'])->name('user.dashboard');
+
+    Route::prefix('/dashboard')->group(function () {
+        Route::get('/', [User\HomeController::class, 'index'])->name('user.dashboard');
+        Route::get('/detail', [User\ProjectController::class, 'detail'])->name('project.detail');
+    });
+
+    Route::get('/customer', [User\CustomerController::class, 'index'])->name('user.customer');
 });
 
 Route::get('/secure', [User\LoginController::class, 'login_index'])->name('user.login');

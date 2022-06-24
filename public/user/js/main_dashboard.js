@@ -67,13 +67,13 @@ function statistic_chart(statistic_1, statistic_2, statistic_3) {
         },
         series: [{
             name: 'Ongoing',
-            data: [statistic_1[0].first_low, statistic_1[0].second_low, statistic_1[0].third_low, null]
+            data: [statistic_1[0].high_ongoing, statistic_1[0].medium_ongoing, statistic_1[0].low_ongoing, null]
         }, {
             name: 'Warning',
-            data: [statistic_1[0].first_medium, statistic_1[0].second_medium, statistic_1[0].third_medium, null]
+            data: [statistic_1[0].high_warning, statistic_1[0].medium_warning, statistic_1[0].low_warning, null]
         }, {
             name: 'Danger',
-            data: [statistic_1[0].first_high, statistic_1[0].second_high, statistic_1[0].third_high, null]
+            data: [statistic_1[0].high_danger, statistic_1[0].medium_danger, statistic_1[0].low_danger, null]
         }, {
             name: 'Complete',
             data: [null, null, null, statistic_1[0].done]
@@ -135,13 +135,13 @@ function statistic_chart(statistic_1, statistic_2, statistic_3) {
         },
         series: [{
             name: 'Ongoing',
-            data: [statistic_2[0].first_low, statistic_2[0].second_low, statistic_2[0].third_low, null]
+            data: [statistic_2[0].high_ongoing, statistic_2[0].medium_ongoing, statistic_2[0].low_ongoing, null]
         }, {
             name: 'Warning',
-            data: [statistic_2[0].first_medium, statistic_2[0].second_medium, statistic_2[0].third_medium, null]
+            data: [statistic_2[0].high_warning, statistic_2[0].medium_warning, statistic_2[0].low_warning, null]
         }, {
             name: 'Danger',
-            data: [statistic_2[0].first_high, statistic_2[0].second_high, statistic_2[0].third_high, null]
+            data: [statistic_2[0].high_danger, statistic_2[0].medium_danger, statistic_2[0].low_danger, null]
         }, {
             name: 'Complete',
             data: [null, null, null, statistic_2[0].done]
@@ -203,16 +203,16 @@ function statistic_chart(statistic_1, statistic_2, statistic_3) {
         },
         series: [{
             name: 'Ongoing',
-            data: [statistic_3[0].first_low, statistic_3[0].second_low, statistic_3[0].third_low, null]
+            data: [statistic_3[0].high_ongoing, statistic_3[0].medium_ongoing, statistic_3[0].low_ongoing, null]
         }, {
             name: 'Warning',
-            data: [statistic_3[0].first_medium, statistic_3[0].second_medium, statistic_3[0].third_medium, null]
+            data: [statistic_3[0].high_warning, statistic_3[0].medium_warning, statistic_3[0].low_warning, null]
         }, {
             name: 'Danger',
-            data: [statistic_3[0].first_high, statistic_3[0].second_high, statistic_3[0].third_high, null]
+            data: [statistic_3[0].high_danger, statistic_3[0].medium_danger, statistic_3[0].low_danger, null]
         }, {
             name: 'Complete',
-            data: [null, null, null, statistic_2[0].done]
+            data: [null, null, null, statistic_3[0].done]
         }]
     });
 }
@@ -242,7 +242,7 @@ function drawDatatable(array_data_1, array_data_2, array_data_3) {
                     render: function(data, type, row) {
                         var detail_id = row["id"];
                         var project_type = row["type_id"];
-                        var html = '<a href="/ANSV-Management/dashboard/detail/' + project_type + '_' + detail_id + '" class="text-dark">' + row["job_name"] + '</a>';
+                        var html = '<a href="./dashboard/detail?id=' + detail_id + '&type=' + project_type + '" class="text-dark">' + row["job_name"] + '</a>';
                         return html;
                     }
                 },
@@ -250,7 +250,13 @@ function drawDatatable(array_data_1, array_data_2, array_data_3) {
                 {
                     "data": "priority",
                     render: function(data, type, row) {
-                        return '<span class="pl-2">' + data + '</span>';
+                        if (data == "High") {
+                            return '<label class="badge badge-light-danger mt-2 f-16" style="margin-left: 14px;">' + data + '</label>';
+                        } else if (data == "Medium") {
+                            return '<label class="badge badge-light-warning mt-2 f-16">' + data + '</label>';
+                        } else {
+                            return '<label class="badge badge-light-success ml-3 mt-2 f-16">' + data + '</label>';
+                        }
                     }
                 },
                 {
@@ -300,9 +306,9 @@ function drawDatatable(array_data_1, array_data_2, array_data_3) {
                 {
                     "data": "project_name",
                     render: function(data, type, row) {
-                        var detail_id = row["detail_id"];
-                        var project_type = row["project_type"];
-                        var html = '<a href="/ANSV-Management/dashboard/detail/' + project_type + '_' + detail_id + '" class="text-dark">' + row["job_name"] + '</a>';
+                        var detail_id = row["id"];
+                        var project_type = row["type_id"];
+                        var html = '<a href="./dashboard/detail?id=' + detail_id + '&type=' + project_type + '" class="text-dark">' + row["job_name"] + '</a>';
                         return html;
                     }
                 },
@@ -350,9 +356,9 @@ function drawDatatable(array_data_1, array_data_2, array_data_3) {
                 {
                     "data": "project_name",
                     render: function(data, type, row) {
-                        var detail_id = row["detail_id"];
-                        var project_type = row["project_type"];
-                        var html = '<a href="/ANSV-Management/dashboard/detail/' + project_type + '_' + detail_id + '" class="text-dark">' + row["job_name"] + '</a>';
+                        var detail_id = row["id"];
+                        var project_type = row["type_id"];
+                        var html = '<a href="./dashboard/detail?id=' + detail_id + '&type=' + project_type + '" class="text-dark">' + row["job_name"] + '</a>';
                         return html;
                     }
                 },

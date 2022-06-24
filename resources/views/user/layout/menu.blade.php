@@ -35,7 +35,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="/ANSV-Management/dashboard/customer" class="nav-link">
+                    <a href="./customer" class="nav-link">
                         <span class="pcoded-micon"><i class="feather icon-users"></i></span>
                         <span class="pcoded-mtext">Khách hàng</span>
                     </a>

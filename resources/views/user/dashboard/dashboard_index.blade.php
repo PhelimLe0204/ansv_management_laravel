@@ -2,10 +2,9 @@
 @section('title', 'Home')
 
 @section('body')
-
 <input type="hidden" name="_token" id="token_input" value="{{ csrf_token() }}">
 
-<!-- ===== Body ===== -->
+<!-- ===== Start: Body ===== -->
 <div class="pcoded-main-container">
 
     <div class="pcoded-content">
@@ -560,5 +559,5 @@
     </script>
 
 </div>
-
+<!-- ===== End: Body ===== -->
 @endsection

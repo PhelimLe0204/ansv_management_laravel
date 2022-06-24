@@ -56,9 +56,9 @@ class HomeController extends Controller
     // Hàm hỗ trợ viết SQL hiển thị trang index (2)
     public function statistic_query($week, $year, $type) {
         $statistic_query = StatisticOfDetail::select(
-            'first_high', 'first_medium', 'first_low',
-            'second_high', 'second_medium', 'second_low',
-            'third_high', 'third_medium', 'third_low',
+            'high_danger', 'high_warning', 'high_ongoing',
+            'medium_danger', 'medium_warning', 'medium_ongoing',
+            'low_danger', 'low_warning', 'low_ongoing',
             'done',
         )->where('year', $year)->where('week', $week)->where('type_id', $type)->get();
 
@@ -186,6 +186,6 @@ class HomeController extends Controller
             }
         }
 
-        return view('user.index', compact('statistic_for_chart_1', 'statistic_for_chart_2', 'statistic_for_chart_3', 'project_table_1', 'project_table_2', 'project_table_3', 'project_slideshow'));
+        return view('user.dashboard.dashboard_index', compact('statistic_for_chart_1', 'statistic_for_chart_2', 'statistic_for_chart_3', 'project_table_1', 'project_table_2', 'project_table_3', 'project_slideshow'));
     }
 }
