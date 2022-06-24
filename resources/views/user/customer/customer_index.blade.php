@@ -48,18 +48,26 @@
                         </div>
                         <div class="card-body p-0">
                             <div class="table-responsive">
-                                <table class="table table-hover mb-0">
-                                    <thead>
-                                        <tr>
-                                            <td></td>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>{!! $customers !!}</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                                <div class="container">
+                                    <table id="customer_table" class="display nowrap customer_table" style="width:100%">
+                                        <thead>
+                                            <tr>
+                                                <th>STT</th>
+                                                <th>Tên khách hàng</th>
+                                                <th>Ngày tạo</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($customers as $key=>$customer)
+                                                <tr>
+                                                    <td>{{ $key +1 }}</td>
+                                                    <td>{{ $customer->customer }}</td>
+                                                    <td>{{ $customer->created_at }}</td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -84,18 +92,26 @@
                         </div>
                         <div class="card-body p-0">
                             <div class="table-responsive">
-                                <table class="table table-hover mb-0">
-                                    <thead>
-                                        <tr>
-                                            <td></td>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                                <div class="container">
+                                    <table id="customer_table" class="display nowrap customer_table" style="width:100%">
+                                        <thead>
+                                            <tr>
+                                                <th>STT</th>
+                                                <th>Tên khách hàng</th>
+                                                <th>Ngày tạo</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($customer_stop as $key=>$customer)
+                                                <tr>
+                                                    <td>{{ $key +1 }}</td>
+                                                    <td>{{ $customer->customer }}</td>
+                                                    <td>{{ $customer->created_at }}</td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>
