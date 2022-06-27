@@ -129,7 +129,7 @@
 
 
     <script type="text/javascript">
-		var owl = $('.owl-carousel');
+        var owl = $('.owl-carousel');
 	  	owl.owlCarousel({
 	       items: 1,
 	       loop: true,
@@ -140,6 +140,10 @@
 	       responsiveClass: true,
 	       autoplayHoverPause: true
 	   	});
+
+        $(document).ready(function() {
+            $('#pic_table, #customer_table').DataTable( );
+        });
     </script>
 </body>
 

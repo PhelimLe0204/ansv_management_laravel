@@ -22,6 +22,6 @@ class PicController extends Controller
             ->orderBy('role.level')
             ->first()->role_name;
         }
-        return view('user.pic',compact('users'));
+        return view('user.pic.pic',compact('users'));
     }
 }
