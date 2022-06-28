@@ -64,6 +64,8 @@ class CreateDetailTable extends Migration
             $table->text('ket_qua_tuan_truoc')->nullable();
             $table->text('ket_qua_tuan_nay')->nullable();
             $table->text('note')->nullable();
+            $table->integer('created_by')->nullable();
+            $table->integer('last_updated_by')->nullable();
 
             $table->timestamps();
         });

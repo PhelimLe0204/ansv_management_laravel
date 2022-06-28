@@ -20,9 +20,12 @@ Route::middleware('login.user')->prefix('/')->group(function () {
     Route::prefix('/dashboard')->group(function () {
         Route::get('/', [User\HomeController::class, 'index'])->name('user.dashboard');
         Route::get('/detail', [User\ProjectController::class, 'detail'])->name('project.detail');
+        Route::post('/detail', [User\ProjectController::class, 'update_from_detail'])->name('project.update_from_detail');
     });
 
     Route::get('/customer', [User\CustomerController::class, 'index'])->name('user.customer');
+
+    Route::get('pic',[User\PicController::class, 'index'])->name('user.pic');
 });
 
 Route::get('/secure', [User\LoginController::class, 'login_index'])->name('user.login');

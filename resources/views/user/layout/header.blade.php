@@ -1,7 +1,7 @@
 <!-- ===== Header ===== -->
 <header class="navbar pcoded-header navbar-expand-lg navbar-light header-blue">
     <div class="m-header">
-        <a class="mobile-menu" id="mobile-collapse" href="#!"><span></span></a>
+        <a class="mobile-menu" id="mobile-collapse" href="javascript:void(0)"><span></span></a>
         <a href="./dashboard?week={{ Session::get('week') }}&year={{ Session::get('year') }}" class="b-brand">
             <!-- ========   change your logo hear   ============ -->
             <img src="user/images/logo/ANSV_logo.png" style="width: 80%;" alt="" class="logo pl-4">
@@ -14,7 +14,7 @@
     <div class="collapse navbar-collapse">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a href="#!" class="pop-search"><i class="feather icon-search"></i></a>
+                <a href="javascript:void(0)" class="pop-search"><i class="feather icon-search"></i></a>
                 <div class="search-bar">
                     <input type="text" class="form-control border-0 shadow-none" placeholder="Search hear">
                     <button type="button" class="close" aria-label="Close">
@@ -26,7 +26,7 @@
         <ul class="navbar-nav ml-auto">
             <li>
                 <div class="dropdown">
-                    <a class="dropdown-toggle" href="#" data-toggle="dropdown"><i class="icon feather icon-bell"></i></a>
+                    <a class="dropdown-toggle" href="javascript:void(0)" data-toggle="dropdown"><i class="icon feather icon-bell"></i></a>
                     <div class="dropdown-menu dropdown-menu-right notification">
                         <div class="noti-head">
                             <h6 class="d-inline-block m-b-0">Thông báo</h6>

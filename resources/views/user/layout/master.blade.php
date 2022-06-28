@@ -29,6 +29,12 @@
     <!-- vendor css -->
     <link rel="stylesheet" href="user/css/style.css">
 
+    <!-- Alertify: CSS -->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css"/><!-- Default theme -->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/semantic.min.css"/><!-- Semantic UI theme -->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/bootstrap.min.css"/><!-- Bootstrap theme -->
+
     <style>
         .badge-size {
             font-size: 15px;
@@ -126,6 +132,10 @@
 
     <!-- Select2 -->
     <script src="user/plugins/select2/js/select2.min.js"></script>
+
+    <!-- Alertify: JS -->
+    <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+
 
 
     <script type="text/javascript">

@@ -239,7 +239,8 @@
                                                             @endif
                                                         </div>
                                                         <div class="col-6">
-                                                            <table class="table table-hover table-bordered">
+                                                            @include('user.components.price_table')
+                                                            {{-- <table class="table table-hover table-bordered">
                                                                 <tr>
                                                                     <th style="width: 14%;" class="text-center">Kế hoạch
                                                                     </th>
@@ -286,8 +287,9 @@
                                                                     <th>PAC</th>
                                                                     <td class="text-right">
                                                                         @if (!empty($data->so_tien_PAC))
-                                                                        {{ number_format($data->so_tien_PAC,0,'','.') }}
-                                                                    @endif
+                                                                            {{ number_format($data->so_tien_PAC,0,'','.') }}
+                                                                        @endif
+                                                                    </td>
                                                                     <td>
                                                                         @if(!empty($data->hop_dong_PAC))
                                                                             {{ date_format(date_create($data->hop_dong_PAC),'d/ m/ Y') }}
@@ -361,7 +363,7 @@
                                                                     <td>N/A</td>
                                                                     <td>N/A</td>
                                                                 </tr>
-                                                            </table>
+                                                            </table> --}}
                                                         </div>
                                                     </div>
                                                 </div>
