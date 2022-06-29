@@ -37,7 +37,7 @@ Route::get('/logout', [User\LoginController::class, 'logout'])->name('user.logou
 Route::get('/test_loadgo', [User\HomeController::class, 'test_loadgo']);
 
 Route::get('/test', function () {
-    return view('welcome');
+    return view('user.tiny_demo');
     // return \App\Models\User::find(1)->userRoles;
 });
 
@@ -47,6 +47,6 @@ Route::middleware('testchecklogin')->prefix('demo')->group(function () {
     Route::get('/abc', [User\TestController::class, 'index'])->middleware('testmiddleware');
 
     Route::get('/test', function () {
-        return view('welcome');
+        return view('user.tiny_demo');
     });
 });

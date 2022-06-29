@@ -4,11 +4,10 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Models\Detail;
-use App\Models\Role;
 use App\Models\User;
-use App\Models\UserRole;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 
 class ProjectController extends Controller
 {
@@ -75,29 +74,70 @@ class ProjectController extends Controller
 
     // Update dữ liệu từ trang detail
     public function update_from_detail(Request $request) {
-        $result = Detail::where('id', $request->detail_id)
-            ->update([
-                'job_name' => $request->job_name,
-                'last_updated_by' => $request->last_updated_by,
-                'updated_at' => DB::raw('now()'),
-            ]);
+        $status_result = 0;
+        // Ứng xử với card 1
+        if ($request->card_id == 1) {
+            $result = Detail::where('id', $request->detail_id)
+                ->update([
+                    'job_name'          => $request->job_name,
+                    'last_updated_by'   => Session::get('user_id'),
+                    'updated_at'        => DB::raw('now()'),
+                ]);
 
-        // Lấy ra dữ liệu thay thế
-        if ($result == 1) {
-            $detail = Detail::join('pic', 'pic.id', '=', 'detail.pic_id')
-                ->join('project', 'project.id', '=', 'pic.project_id')
-                ->select('project.project_name', "detail.type_id", 'detail.job_name', 'detail.created_by', 'detail.created_at', 'detail.last_updated_by', 'detail.created_at')
-                ->where('detail.id', $request->detail_id)->first();
+            // Lấy ra dữ liệu thay thế
+            if ($result == 1) {
+                $detail = Detail::join('pic', 'pic.id', '=', 'detail.pic_id')
+                    ->join('project', 'project.id', '=', 'pic.project_id')
+                    ->select('project.project_name', "detail.type_id", 'detail.job_name', 'detail.created_by', 'detail.created_at', 'detail.last_updated_by', 'detail.updated_at')
+                    ->where('detail.id', $request->detail_id)->first();
 
-            // Lấy ra người tạo dự án
-            $detail->created_by = $this->get_user_name_by_id($detail->created_by)->user_name;
+                // Lấy ra người tạo dự án
+                $detail->created_by = $this->get_user_name_by_id($detail->created_by)->user_name;
 
-            // Lấy ra người cập nhật cuối
-            $detail->last_updated_by = $this->get_user_name_by_id($detail->last_updated_by)->user_name;
-        } else {
-            return $result;
+                // Lấy ra người cập nhật cuối
+                $detail->last_updated_by = $this->get_user_name_by_id($detail->last_updated_by)->user_name;
+            } else {
+                return $result;
+            }
+
+            return view('user.ajaxReplaceContent.detail_card_1', compact('detail'));
         }
 
-        return view('user.ajaxReplaceContent.table_detail_card_1', compact('detail'));
+        // Ứng xử với card 2
+        if ($request->card_id == 2) {
+            $result = Detail::where('id', $request->detail_id)
+                ->update([
+                    'general_issue'         => $request->general_issue,
+                    'solution'              => $request->solution,
+                    'ke_hoach_tuan_nay'     => $request->ke_hoach_tuan_nay,
+                    'ke_hoach_tuan_sau'     => $request->ke_hoach_tuan_sau,
+                    'ket_qua_tuan_truoc'    => $request->ket_qua_tuan_truoc,
+                    'ket_qua_tuan_nay'      => $request->ket_qua_tuan_nay,
+                    'last_updated_by'       => Session::get('user_id'),
+                    'updated_at'            => DB::raw('now()'),
+                ]);
+
+            // Lấy ra dữ liệu thay thế
+            if ($result == 1) {
+                $detail = Detail::join('pic', 'pic.id', '=', 'detail.pic_id')
+                    ->join('project', 'project.id', '=', 'pic.project_id')
+                    ->select('detail.id', 'detail.general_issue', "detail.solution", 'detail.ke_hoach_tuan_nay',
+                        'detail.ke_hoach_tuan_sau', 'detail.ket_qua_tuan_truoc', 'detail.ket_qua_tuan_nay',
+                        'detail.created_by', 'detail.created_at', 'detail.last_updated_by', 'detail.updated_at')
+                    ->where('detail.id', $request->detail_id)->first();
+
+                // Lấy ra người tạo dự án
+                $detail->created_by = $this->get_user_name_by_id($detail->created_by)->user_name;
+
+                // Lấy ra người cập nhật cuối
+                $detail->last_updated_by = $this->get_user_name_by_id($detail->last_updated_by)->user_name;
+            } else {
+                return $result;
+            }
+
+            return view('user.ajaxReplaceContent.detail_card_2', compact('detail'));
+        }
+
+        return $status_result;
     }
 }
